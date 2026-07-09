@@ -1,19 +1,37 @@
-.face.verso {
-  background-image: url("images/verso_cartas.jpg");
-  background-size: cover;
-  border-radius: 12px;
-}
-
 .face{
     position: absolute;
     width: 100%;
     height: 100%;
+    backface-visibility: hidden;
+    background-size: cover;
+    background-position: center;
+    border-radius: 12px;
 }
+.face.verso {
+  background-image: url("assets/images/verso_cartas.jpg");
+  background-size: cover;
+  border-radius: 12px;
+}
+.face.frente{
+    transform: rotateY(180deg);
+}
+
 .carta{
     width: 150px;
     height: 225px;
-    background-color: orangered;
     position: relative;
+    perspective: 1000px; /*define a "distância da câmera" até a cena 3D*/
+}
+
+.carta-interna {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d; /*mantém a profundidade 3D real dos filhos*/
+  transition: transform 0.6s; /*faz a rotação acontecer suavemente ao longo de 0.6s*/
+}
+.carta.virada .carta-interna {
+  transform: rotateY(180deg); /*quando a .carta tiver a classe .virada, gire a .carta-interna dela em 180 graus*/
 }
 
 #container{
